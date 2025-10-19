@@ -3,3 +3,5 @@ ta
 matplotlib
 pandas
 numpy
+selenium
+webdriver-manager
