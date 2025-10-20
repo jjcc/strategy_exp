@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
+import pandas as pd
 import time
 
 def scrape_unusual_options_selenium():
@@ -74,6 +75,13 @@ def scrape_unusual_options_selenium():
 if __name__ == '__main__':
     try:
         results = scrape_unusual_options_selenium()
+        df = pd.DataFrame(results)
+        date_time_str = time.strftime("%Y%m%d_%H%M%S")
+        filename = f'unusual_option/uo_{date_time_str}.csv'
+        df.to_csv(filename, index=False)
+        print(f"Data saved to {filename}")
+
+
         for item in results:
             print(item)
     except Exception as e:
