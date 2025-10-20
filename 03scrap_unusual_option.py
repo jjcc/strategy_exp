@@ -8,6 +8,12 @@ from selenium.webdriver.chrome.options import Options
 import pandas as pd
 import time
 
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
+url = os.getenv('site')
+
 def scrape_unusual_options_selenium():
     # Set up Chrome options for headless mode (optional)
     chrome_options = Options()
@@ -47,7 +53,7 @@ def scrape_unusual_options_selenium():
             symbol_link = symbol_cell.find_element(By.TAG_NAME, "a")
             symbol = symbol_link.text.strip()
             symbol_href = symbol_link.get_attribute("href")
-            full_url = 'https://stocknear.com' + symbol_href if symbol_href.startswith('/') else symbol_href
+            full_url = url + symbol_href if symbol_href.startswith('/') else symbol_href
             
             # Type (Puts/Calls)
             typ = cols[1].text.strip()
@@ -82,7 +88,7 @@ if __name__ == '__main__':
         print(f"Data saved to {filename}")
 
 
-        for item in results:
-            print(item)
+        #for item in results:
+        #    print(item)
     except Exception as e:
         print(f"Error: {e}")
