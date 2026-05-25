@@ -4,3 +4,7 @@
  * calculate_triple_nonym.py -- the same evaluation but on None YieldMax stocks/etfs
  * Conclusion: For YM , even with lieu payment the gaps are often larger than the lieu. That resulted in profit. Not valid for Non YM
  * The opportunitiy disappear because in early Oct YieldMax changed the distribution schedule to weekly. The gap is not significant to explore
+
+ ## More scripts
+ * tradeview_filter.py -- a tradeview filter example
+ * 04_ib_flexquery.py -- a IB flex query task 

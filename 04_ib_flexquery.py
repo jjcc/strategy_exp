@@ -100,14 +100,6 @@ if __name__ == "__main__":
         print("Failed to send flex query.")
         exit(1)
 
-    response_example = """
-<FlexStatementResponse timestamp='24 May, 2026 04:56 PM EDT'>
-<Status>Success</Status>
-<ReferenceCode>6302975313</ReferenceCode>
-<Url>https://gdcdyn.interactivebrokers.com/AccountManagement/FlexWebService/GetStatement</Url>
-</FlexStatementResponse>
-    """
-    #refCode = parse_request(response_example)
     refCode = parse_request(resp)
     if refCode is None:
         print("Failed to parse reference code from response.")
@@ -125,5 +117,8 @@ if __name__ == "__main__":
     df = convert_seg2_to_df(seg2)
     file_name = f"output/ib_flexquery_result_{refCode}_{date_string}.csv"
     df.to_csv(file_name, index=False)
-
-    print(df)
+    # df of put
+    df_put = df[df["Put/Call"] == "P"].copy()
+    df_put.to_csv(f"output/put_{refCode}_{date_string}.csv", index=False)
+    print(f"Data saved to {file_name}")
+    print(f"Put data saved to output/put_{refCode}_{date_string}.csv")
